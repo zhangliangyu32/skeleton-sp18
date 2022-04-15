@@ -138,6 +138,10 @@ public class IntList {
             temp = temp.rest;
             A = A.rest;
         }
+        if (B == null)
+        {
+            return result;
+        }
         temp.rest = new IntList(B.first, null);
         temp = temp.rest;
         B = B.rest;
