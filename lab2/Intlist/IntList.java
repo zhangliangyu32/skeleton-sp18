@@ -8,6 +8,13 @@ import java.util.Formatter;
  *         [Do not modify this file.]
  */
 public class IntList {
+    public static void main(String args[])
+    {
+        IntListTest test = new IntListTest();
+        test.testDcatenate();
+        test.testCatenate();
+        return;
+    }
     /**
      * First element of list.
      */
@@ -82,7 +89,13 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        IntList L = A;
+        while (L.rest != null)
+        {
+            L = L.rest;
+        }
+        L.rest = B;
+        return A;
     }
 
     /**
@@ -91,7 +104,25 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        IntList result = new IntList(A.first, null);
+        IntList temp = result;
+        A = A.rest;
+        while (A != null)
+        {
+            temp.rest = new IntList(A.first, null);
+            temp = temp.rest;
+            A = A.rest;
+        }
+        temp.rest = new IntList(B.first, null);
+        temp = temp.rest;
+        B = B.rest;
+        while (B != null)
+        {
+            temp.rest = new IntList(B.first, null);
+            temp = temp.rest;
+            B = B.rest;
+        }
+        return result;
     }
 
 
