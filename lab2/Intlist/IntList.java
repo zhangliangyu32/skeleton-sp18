@@ -93,12 +93,12 @@ public class IntList {
         {
             return B;
         }
-        IntList L = A;
-        while (L.rest != null)
+        IntList temp = A;
+        while (temp.rest != null)
         {
-            L = L.rest;
+            temp = temp.rest;
         }
-        L.rest = B;
+        temp.rest = B;
         return A;
     }
 
