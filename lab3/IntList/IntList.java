@@ -14,6 +14,7 @@ public class IntList {
         test.testCatenate();
         return;
     }
+
     /**
      * First element of list.
      */
@@ -35,7 +36,7 @@ public class IntList {
      * A List with null rest, and first = 0.
      */
     public IntList() {
-    /* NOTE: public IntList () { }  would also work. */
+        /* NOTE: public IntList () { }  would also work. */
         this(0, null);
     }
 
@@ -143,8 +144,40 @@ public class IntList {
         return result;
     }
 
+    public static int sizeof(IntList A)
+    {
+        int result = 0;
+        while (A != null)
+        {
+            result += 1;
+            A = A.rest;
+        }
+        return result;
+    }
+
     public static IntList reverse(IntList A) {
-        return null;
+        if (A == null) {
+            return null;
+        }
+        int[] tmpstack = new int[sizeof(A)];
+        int i = 0;
+        IntList tmp = A;
+        while (tmp != null)
+        {
+            tmpstack[i] = tmp.first;
+            tmp = tmp.rest;
+            i++;
+        }
+        i -= 1;
+        tmp = A;
+        while (i >= 0)
+        {
+            tmp.first = tmpstack[i];
+            tmp = tmp.rest;
+            i--;
+        }
+        return A;
+
     }
 
 
