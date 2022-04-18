@@ -50,7 +50,7 @@ public class ArrayDeque<T> {
                 tmpMem[i] = get(i);
             }
             front = 0;
-            tail = size;
+            tail = size - 1;
             mem = tmpMem;
         } else if (flag == 1) {
             if (memSize <= 16) {
@@ -62,7 +62,7 @@ public class ArrayDeque<T> {
                 tmpMem[i] = get(i);
             }
             front = 0;
-            tail = size;
+            tail = size - 1;
             mem = tmpMem;
         }
     }
