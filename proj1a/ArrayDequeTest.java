@@ -94,11 +94,11 @@ public class ArrayDequeTest {
         // should be empty
         boolean passed = checkEmpty(true, lld1.isEmpty());
 
-        lld1.addFirst(10);
-        lld1.addFirst(20);
-        lld1.addFirst(30);
+        lld1.addLast(10);
+        lld1.addLast(20);
+        lld1.addLast(30);
         // should not be empty
-        passed = (lld1.get(2) == 10) && passed;
+        passed = (lld1.get(2) == 30) && passed;
 
         lld1.removeLast();
         // should be empty

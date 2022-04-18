@@ -48,10 +48,8 @@ public class LinkedListDeque<T> {
         return tmp.item;
     }
 
-    public T removeLast()
-    {
-        if (size == 0)
-        {
+    public T removeLast() {
+        if (size == 0) {
             return null;
         }
         Node tmp = sentinel.prev;
@@ -61,62 +59,47 @@ public class LinkedListDeque<T> {
         return tmp.item;
     }
 
-    public boolean isEmpty()
-    {
+    public boolean isEmpty() {
         return (size == 0);
     }
 
-    public int size()
-    {
+    public int size() {
         return size;
     }
 
-    public void printDeque()
-    {
+    public void printDeque() {
         Node tmp = sentinel.next;
-        while (tmp != sentinel)
-        {
+        while (tmp != sentinel) {
             System.out.print(tmp.item);
             System.out.print(' ');
             tmp = tmp.next;
         }
     }
 
-    public T get(int index)
-    {
-        if (index >= size)
-        {
+    public T get(int index) {
+        if (index >= size) {
             return null;
         }
         Node tmp = sentinel.next;
-        while (true)
-        {
-            if (index == 0)
-            {
+        while (true) {
+            if (index == 0) {
                 return tmp.item;
             }
             tmp = tmp.next;
-            index --;
+            index--;
         }
     }
 
-    private T getRecursive(int index, Node begin)
-    {
-        if (index >= size)
-        {
+    private T getRecursive(int index, Node begin) {
+        if (index >= size) {
             return null;
-        }
-        else if (index == 0)
-        {
+        } else if (index == 0) {
             return begin.item;
-        }
-        else
-        {
+        } else {
             return getRecursive(index - 1, begin.next);
         }
     }
-    public T getRecursive(int index)
-    {
+    public T getRecursive(int index) {
         return getRecursive(index, sentinel.next);
     }
 }
