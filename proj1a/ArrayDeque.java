@@ -16,6 +16,15 @@ public class ArrayDeque<T> {
         front = 0;
         tail = 0;
     }
+    //when size == 0, refresh the array to avoid some tricky problems.
+    private void refresh() {
+        mem = null;
+        memSize = 8;
+        front = 0;
+        tail = 0;
+        size = 0;
+        rFactor = 2;
+    }
     public T get(int index) {
         if (index >= size) {
             return null;
@@ -97,13 +106,14 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        if (size - 1 < memSize / 2 && size > 16) {
+        if (size - 1 < memSize / 2 && memSize > 16) {
             resize(1);
         }
         size -= 1;
         T tmp = mem[front];
-        if (size == 0){
-            front -= 1;
+        if (size == 0) {
+            refresh();
+            return tmp;
         }
         front = (front + 1) % memSize;
         return tmp;
@@ -117,8 +127,9 @@ public class ArrayDeque<T> {
         }
         size -= 1;
         T tmp = mem[tail];
-        if (size == 0){
-            tail += 1;
+        if (size == 0) {
+            refresh();
+            return tmp;
         }
         tail = (tail - 1 + memSize) % memSize;
         return tmp;
