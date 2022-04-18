@@ -44,32 +44,33 @@ public class ArrayDeque<T> {
         //flag==0 means increase memSize, flag==1 means decrease memSize
         //reassign front and tail while resizing
         if (flag == 0) {
-            memSize *= rFactor;
-            T[] tmpMem = (T[]) new Object[memSize];
+            T[] tmpMem = (T[]) new Object[memSize * rFactor];
             for (int i = 0; i < size; i++) {
                 tmpMem[i] = get(i);
             }
             front = 0;
             tail = size - 1;
             mem = tmpMem;
+            memSize *= rFactor;
         } else if (flag == 1) {
             if (memSize <= 16) {
                 return;
             }
-            memSize /= rFactor;
-            T[] tmpMem = (T[]) new Object[memSize];
+            T[] tmpMem = (T[]) new Object[memSize / rFactor];
             for (int i = 0; i < size; i++) {
                 tmpMem[i] = get(i);
             }
             front = 0;
             tail = size - 1;
             mem = tmpMem;
+            memSize /= rFactor;
         }
     }
 
     public void addFirst(T item) {
         if (size == 0) {
             mem = (T[]) new Object[8];
+            front += 1;
         }
         if (size + 1 > memSize) {
             resize(0);
