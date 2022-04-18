@@ -1,9 +1,9 @@
 public class ArrayDeque<T> {
     private T[] mem;
     private int size;
+//    front, tail is the place of the last element.
+//    tricky to handle when the size of the deque is 0.
     private int front;
-//    tail is the place of the last element.
-//    trick to handle when add the very first element to the null deque.
     private int tail;
     private int rFactor;
     private int memSize;
@@ -102,6 +102,9 @@ public class ArrayDeque<T> {
         }
         size -= 1;
         T tmp = mem[front];
+        if (size == 0){
+            front -= 1;
+        }
         front = (front + 1) % memSize;
         return tmp;
     }
@@ -114,6 +117,9 @@ public class ArrayDeque<T> {
         }
         size -= 1;
         T tmp = mem[tail];
+        if (size == 0){
+            tail += 1;
+        }
         tail = (tail - 1 + memSize) % memSize;
         return tmp;
     }

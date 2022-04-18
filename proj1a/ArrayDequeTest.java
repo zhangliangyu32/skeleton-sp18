@@ -96,17 +96,10 @@ public class ArrayDequeTest {
         ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
         // should be empty
         boolean passed = checkEmpty(true, lld1.isEmpty());
-        lld1.addLast(0);
-        lld1.addFirst(1);
+        lld1.addFirst(0);
+        lld1.removeLast();
         lld1.addLast(2);
-        lld1.addFirst(3);
-        lld1.addLast(4);
-        lld1.addFirst(5);
-        lld1.addFirst(6);
-        lld1.addLast(7);
-        lld1.size();
-        lld1.addFirst(9);
-//        passed = (lld1.get(0) == 1) && passed;
+        passed = (lld1.get(0) == 2) && passed;
         printTestStatus(passed);
     }
 
