@@ -2,7 +2,8 @@ public class ArrayDeque<T> {
     private T[] mem;
     private int size;
     private int front;
-//    tail is the place right after the last element.
+//    tail is the place of the last element.
+//    trick to handle when add the very first element to the null deque.
     private int tail;
     private int rFactor;
     private int memSize;
@@ -81,13 +82,14 @@ public class ArrayDeque<T> {
     public void addLast(T item) {
         if (size == 0) {
             mem = (T[]) new Object[8];
+            tail -= 1;
         }
         if (size + 1 > memSize) {
             resize(0);
         }
         size += 1;
         tail = (tail + 1) % memSize;
-        mem[tail - 1] = item;
+        mem[tail] = item;
     }
 
     public T removeFirst() {
@@ -110,7 +112,7 @@ public class ArrayDeque<T> {
             resize(1);
         }
         size -= 1;
-        T tmp = mem[tail - 1];
+        T tmp = mem[tail];
         tail = (tail - 1 + memSize) % memSize;
         return tmp;
     }
