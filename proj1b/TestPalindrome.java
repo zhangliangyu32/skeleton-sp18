@@ -17,7 +17,7 @@ public class TestPalindrome {
         assertEquals("persiflage", actual);
     }
     @Test
-    public void testIsPalindrome(){
+    public void testIsPalindrome() {
         assertTrue(palindrome.isPalindrome(""));
         assertTrue(palindrome.isPalindrome("a"));
         assertTrue(palindrome.isPalindrome("aa"));
@@ -26,7 +26,7 @@ public class TestPalindrome {
         assertFalse(palindrome.isPalindrome("abc"));
     }
     @Test
-    public void testIsPalindromeOffByOne(){
+    public void testIsPalindromeOffByOne() {
         assertTrue(palindrome.isPalindrome("", offByOne));
         assertTrue(palindrome.isPalindrome("a", offByOne));
         assertFalse(palindrome.isPalindrome("aa", offByOne));
@@ -35,7 +35,7 @@ public class TestPalindrome {
         assertTrue(palindrome.isPalindrome("flake", offByOne));
     }
     @Test
-    public void testIspalindromeOffByN(){
+    public void testIspalindromeOffByN() {
         assertTrue(palindrome.isPalindrome("", offBy5));
         assertTrue(palindrome.isPalindrome("a", offBy5));
         assertFalse(palindrome.isPalindrome("aa", offBy5));
