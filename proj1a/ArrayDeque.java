@@ -1,7 +1,7 @@
 public class ArrayDeque<T> {
     private T[] mem;
     private int size;
-//    front, tail is the place of the last element.
+//    front, tail is the place of the first/last element.
 //    tricky to handle when the size of the deque is 0.
     private int front;
     private int tail;
