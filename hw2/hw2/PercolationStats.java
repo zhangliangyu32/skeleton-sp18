@@ -2,10 +2,10 @@ package hw2;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 public class PercolationStats {
-    double[] thresholds;
-    PercolationFactory pf;
-    int T;
-    int N;
+    private double[] thresholds;
+    private PercolationFactory pf;
+    private int T;
+    private int N;
     private double oneExperiment(Percolation p) {
         while (!p.percolates()) {
             int row = StdRandom.uniform(N);

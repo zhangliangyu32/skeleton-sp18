@@ -3,12 +3,12 @@ package hw2;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-    WeightedQuickUnionUF sitesUF;
-    WeightedQuickUnionUF sitesUFWithoutBottom;
-    int [][] sites;
-    int N;
-    int numOfOpenSites;
-    public int xyTo1D(int row, int col) {
+    private WeightedQuickUnionUF sitesUF;
+    private WeightedQuickUnionUF sitesUFWithoutBottom;
+    private int [][] sites;
+    private int N;
+    private int numOfOpenSites;
+    private int xyTo1D(int row, int col) {
         return row * N + col + 1;
     }
     public Percolation(int N) {
@@ -25,11 +25,11 @@ public class Percolation {
         this.numOfOpenSites = 0;
         sitesUF = new WeightedQuickUnionUF(N * N + 2); //two virtual sites
         sitesUFWithoutBottom = new WeightedQuickUnionUF(N * N + 1); //only one virtual site
-        for (int i = 0; i < N; i++) {
-            sitesUF.union(0, xyTo1D(0, i));
-            sitesUF.union(N * N + 1, xyTo1D(N - 1, i));
-            sitesUFWithoutBottom.union(0, xyTo1D(0, i));
-        }
+//        for (int i = 0; i < N; i++) {
+//            sitesUF.union(0, xyTo1D(0, i));
+//            sitesUF.union(N * N + 1, xyTo1D(N - 1, i));
+//            sitesUFWithoutBottom.union(0, xyTo1D(0, i));
+//        }
     } // create N-by-N grid, with all sites initially blocked
     public void open(int row, int col) {
         if (row >= N || col >= N) {
@@ -38,6 +38,13 @@ public class Percolation {
         if (!isOpen(row, col)) {
             numOfOpenSites += 1;
             sites[row][col] = 1;
+            if (row == 0) {
+                sitesUF.union(0, xyTo1D(row, col));
+                sitesUFWithoutBottom.union(0, xyTo1D(row, col));
+            }
+            if (row == N - 1) {
+                sitesUF.union(N * N + 1, xyTo1D(row, col));
+            }
             if (row >= 1 && isOpen(row - 1, col)) {
                 sitesUF.union(xyTo1D(row, col), xyTo1D(row - 1, col));
                 sitesUFWithoutBottom.union(xyTo1D(row, col), xyTo1D(row - 1, col));
@@ -74,6 +81,8 @@ public class Percolation {
     public boolean percolates() {
         return sitesUF.connected(0, N * N + 1);
     }              // does the system percolate?
-//    public static void main(String[] args)   // use for unit testing (not required)
+    public static void main(String[] args) {
+        return;
+    }   // use for unit testing (not required)
 
 }
