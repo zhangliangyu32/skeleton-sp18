@@ -12,7 +12,7 @@ public class PercolationStats {
             int col = StdRandom.uniform(N);
             p.open(row, col);
         }
-        return p.numberOfOpenSites() / (N * N);
+        return (double) (p.numberOfOpenSites()) / (N * N);
     }
     public PercolationStats(int N, int T, PercolationFactory pf) {
         if (N <= 0 || T <= 0) {
