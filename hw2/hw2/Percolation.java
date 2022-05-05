@@ -23,14 +23,14 @@ public class Percolation {
             }
         }
         this.numOfOpenSites = 0;
-        sitesUF = new WeightedQuickUnionUF(N * N + 2);//two virtual sites with subscript 0 and N^2 + 1;
-        sitesUFWithoutBottom = new WeightedQuickUnionUF(N * N + 1);//only one virtual site with subscript 0
+        sitesUF = new WeightedQuickUnionUF(N * N + 2); //two virtual sites
+        sitesUFWithoutBottom = new WeightedQuickUnionUF(N * N + 1); //only one virtual site
         for (int i = 0; i < N; i++) {
             sitesUF.union(0, xyTo1D(0, i));
             sitesUF.union(N * N + 1, xyTo1D(N - 1, i));
             sitesUFWithoutBottom.union(0, xyTo1D(0, i));
         }
-    }// create N-by-N grid, with all sites initially blocked
+    } // create N-by-N grid, with all sites initially blocked
     public void open(int row, int col) {
         if (row >= N || col >= N) {
             throw new IndexOutOfBoundsException("Index out of bounds.");
@@ -67,7 +67,7 @@ public class Percolation {
             throw new IndexOutOfBoundsException("Index out of bounds.");
         }
         return sitesUFWithoutBottom.connected(0, xyTo1D(row, col));
-    }// is the site (row, col) full?
+    } // is the site (row, col) full?
     public int numberOfOpenSites() {
         return numOfOpenSites;
     }           // number of open sites
