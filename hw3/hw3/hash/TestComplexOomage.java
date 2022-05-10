@@ -41,15 +41,11 @@ public class TestComplexOomage {
     @Test
     public void testWithDeadlyParams() {
         List<Oomage> deadlyList = new ArrayList<>();
-        int[] param1 = {1, 9, 8, 2, 3};
-        int[] param2 = {9, 1, 8, 2, 3};
-        int[] param3 = {2, 8, 2, 9, 3};
-        int[] param4 = {8, 1, 2, 9, 3};
         // Your code here.
-        deadlyList.add(new ComplexOomage(Arrays.stream(param1).boxed().toList()));
-        deadlyList.add(new ComplexOomage(Arrays.stream(param2).boxed().toList()));
-        deadlyList.add(new ComplexOomage(Arrays.stream(param3).boxed().toList()));
-        deadlyList.add(new ComplexOomage(Arrays.stream(param4).boxed().toList()));
+        deadlyList.add(new ComplexOomage(Arrays.asList(1, 9, 8, 2, 3)));
+        deadlyList.add(new ComplexOomage(Arrays.asList(9, 1, 8, 2, 3)));
+        deadlyList.add(new ComplexOomage(Arrays.asList(2, 8, 2, 9, 3)));
+        deadlyList.add(new ComplexOomage(Arrays.asList(8, 1, 2, 9, 3)));
 
 
         assertTrue(OomageTestUtility.haveNiceHashCodeSpread(deadlyList, 10));
