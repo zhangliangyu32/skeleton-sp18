@@ -34,6 +34,9 @@ public class Board implements WorldState {
         if (!(y instanceof Board)) {
             return false;
         }
+        if (((Board) y).size() != size()) {
+            return false;
+        }
         for (int i = 0; i < size(); i++) {
             for (int j = 0; j < size(); j++) {
                 if (tileAt(i, j) != ((Board) y).tileAt(i, j)) {

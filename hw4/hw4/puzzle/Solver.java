@@ -2,6 +2,7 @@ package hw4.puzzle;
 import edu.princeton.cs.algs4.MinPQ;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Solver {
@@ -59,6 +60,7 @@ public class Solver {
             soluts.add(current.state);
             current = current.last;
         }
+        java.util.Collections.reverse(soluts);
         return;
     }
     public int moves() {
