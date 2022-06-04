@@ -1,6 +1,6 @@
 package hw4.puzzle;
 import edu.princeton.cs.algs4.Queue;
-public class Board implements WorldState{
+public class Board implements WorldState {
 
     /** Returns the string representation of the board. 
       * Uncomment this method. */
@@ -25,8 +25,13 @@ public class Board implements WorldState{
         }
         return tiles[i][j];
     }
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+    @Override
     public boolean equals(Object y) {
-        if (! (y instanceof Board)) {
+        if (!(y instanceof Board)) {
             return false;
         }
         for (int i = 0; i < size(); i++) {
@@ -110,7 +115,7 @@ public class Board implements WorldState{
         s.append(N + "\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                s.append(String.format("%2d ", tileAt(i,j)));
+                s.append(String.format("%2d ", tileAt(i, j)));
             }
             s.append("\n");
         }

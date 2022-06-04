@@ -2,7 +2,6 @@ package hw4.puzzle;
 import edu.princeton.cs.algs4.MinPQ;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Solver {
@@ -12,7 +11,7 @@ public class Solver {
         private int distanceToInitial;
         private int estimatedDistanceToGoal;
         private SearchNode last;
-        public SearchNode(WorldState state, int distanceToInitial, SearchNode last) {
+        SearchNode(WorldState state, int distanceToInitial, SearchNode last) {
             this.state = state;
             this.distanceToInitial = distanceToInitial;
             this.last = last;
@@ -40,7 +39,7 @@ public class Solver {
     private int moves;
     private List<WorldState> soluts;
     public Solver(WorldState initial) {
-        MinPQ <SearchNode> pq = new MinPQ<SearchNode>();
+        MinPQ<SearchNode> pq = new MinPQ<SearchNode>();
         SearchNode current = new SearchNode(initial, 0, null);
         pq.insert(current);
         while (!pq.isEmpty()) {
@@ -49,7 +48,7 @@ public class Solver {
                 break;
             }
             for (WorldState s : current.getState().neighbors()) {
-                if (current.getLast() == null || s != current.getLast().getState()) {
+                if (current.getLast() == null || !s.equals(current.getLast().getState())) {
                     pq.insert(new SearchNode(s, current.getDistanceToInitial() + 1, current));
                 }
             }
