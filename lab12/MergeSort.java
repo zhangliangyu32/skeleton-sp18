@@ -35,7 +35,14 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Queue<Item>>
             makeSingleItemQueues(Queue<Item> items) {
         // Your code here!
-        return null;
+        Queue<Queue<Item>> queueOfQueues = new Queue<Queue<Item>>();
+        Queue<Item> tmp;
+        for (Item item : items) {
+            tmp = new Queue<Item>();
+            tmp.enqueue(item);
+            queueOfQueues.enqueue(tmp);
+        }
+        return queueOfQueues;
     }
 
     /**
@@ -53,14 +60,54 @@ public class MergeSort {
      */
     private static <Item extends Comparable> Queue<Item> mergeSortedQueues(
             Queue<Item> q1, Queue<Item> q2) {
-        // Your code here!
-        return null;
+        Queue<Item> mergedQueue = new Queue<Item>();
+        while (!q1.isEmpty() || !q2.isEmpty()) {
+            mergedQueue.enqueue(getMin(q1, q2));
+        }
+        return mergedQueue;
+    }
+    private static <Item extends Comparable> Queue<Queue<Item>> mergeSortRecur (Queue<Queue<Item>> queueOfQueues) {
+        if (queueOfQueues.size() == 1) {
+            return queueOfQueues;
+        }
+        else {
+            Queue<Queue<Item>> qq = new Queue<Queue<Item>>();
+            int i = 0;
+            while (queueOfQueues.size() > 1) {
+                qq.enqueue(mergeSortedQueues(queueOfQueues.dequeue(), queueOfQueues.dequeue()));
+            }
+            if (!queueOfQueues.isEmpty()) {
+                qq.enqueue(queueOfQueues.dequeue());
+            }
+            return mergeSortRecur(qq);
+        }
+
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
         // Your code here!
-        return items;
+        if (items.isEmpty()) {
+            return items;
+        }
+        Queue<Queue<Item>> queueOfQueues = makeSingleItemQueues(items);
+        return mergeSortRecur(queueOfQueues).dequeue();
+    }
+    public static void main(String[] args) {
+        Queue<String> students = new Queue<String>();
+        students.enqueue("Alice");
+        students.enqueue("Clara");
+        students.enqueue("Bob");
+        students.enqueue("Kate");
+        Queue<String> sortedStudents = MergeSort.mergeSort(students);
+        System.out.println("Original Queue:");
+        for (String item : students) {
+            System.out.println(item);
+        }
+        System.out.println("Sorted Queue:");
+        for (String item : sortedStudents) {
+            System.out.println(item);
+        }
     }
 }
