@@ -63,7 +63,7 @@ public class QuickSort {
     public static <Item extends Comparable> Queue<Item> quickSort(
             Queue<Item> items) {
         // Your code here!
-        if (items.size() == 1) {
+        if (items.size() <= 1) {
             return items;
         }
         else if (items.size() == 2) {
