@@ -1,4 +1,5 @@
 import edu.princeton.cs.algs4.Picture;
+import java.awt.Color;
 public class SeamCarver {
     private Picture picture;
     private int width;
@@ -18,16 +19,16 @@ public class SeamCarver {
         return height;
     }
     public double energy(int x, int y) {
-        int colorAtXMinus1 = picture.getRGB(Math.max(x - 1, 0), y);
-        int colorAtXPlus1 = picture.getRGB(Math.min(width - 1, x + 1), y);
-        int deltaRedX = (colorAtXMinus1 & 0xff0000) >> 16 - (colorAtXPlus1 & 0xff0000) >> 16;
-        int deltaGreenX = (colorAtXMinus1 & 0xff00) >> 8 - (colorAtXPlus1 & 0xff00) >> 8;;
-        int deltaBlueX = (colorAtXMinus1 & 0xff) - (colorAtXPlus1 & 0xff);
-        int colorAtYMinus1 = picture.getRGB(x, Math.max(y - 1, 0));
-        int colorAtYPlus1 = picture.getRGB(x, Math.min(height - 1, y + 1));
-        int deltaRedY = (colorAtYMinus1 & 0xff0000) >> 16 - (colorAtYPlus1 & 0xff0000) >> 16;
-        int deltaGreenY = (colorAtYMinus1 & 0xff00) >> 8 - (colorAtYPlus1 & 0xff00) >> 8;;
-        int deltaBlueY = (colorAtYMinus1 & 0xff) - (colorAtYPlus1 & 0xff);
+        Color colorAtXMinus1 = picture.get(Math.max(x - 1, 0), y);
+        Color colorAtXPlus1 = picture.get(Math.min(width - 1, x + 1), y);
+        int deltaRedX = colorAtXMinus1.getRed() - colorAtXPlus1.getRed();
+        int deltaGreenX = colorAtXMinus1.getGreen() - colorAtXPlus1.getGreen();
+        int deltaBlueX = colorAtXMinus1.getBlue() - colorAtXPlus1.getBlue();
+        Color colorAtYMinus1 = picture.get(x, Math.max(y - 1, 0));
+        Color colorAtYPlus1 = picture.get(x, Math.min(height - 1, y + 1));
+        int deltaRedY = colorAtYPlus1.getRed() - colorAtYMinus1.getRed();
+        int deltaGreenY = colorAtYMinus1.getGreen() - colorAtYPlus1.getGreen();
+        int deltaBlueY = colorAtYMinus1.getBlue() - colorAtYPlus1.getBlue();
         return deltaBlueX * deltaBlueX + deltaGreenX * deltaGreenX + deltaRedX * deltaRedX +
                 deltaBlueY * deltaBlueY + deltaGreenY * deltaGreenY + deltaRedY * deltaRedY;
     }
