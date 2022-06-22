@@ -5,12 +5,12 @@ public class SeamCarver {
     private int width;
     private int height;
     public SeamCarver(Picture picture) {
-        this.picture = picture;
+        this.picture = new Picture(picture);
         this.width = picture.width();
         this.height = picture.height();
     }
     public Picture picture() {
-        return picture;
+        return new Picture(picture);
     }
     public int width() {
         return width;
@@ -47,12 +47,12 @@ public class SeamCarver {
         int deltaRedY = colorAtYPlus1.getRed() - colorAtYMinus1.getRed();
         int deltaGreenY = colorAtYMinus1.getGreen() - colorAtYPlus1.getGreen();
         int deltaBlueY = colorAtYMinus1.getBlue() - colorAtYPlus1.getBlue();
-        return deltaBlueX * deltaBlueX + deltaGreenX * deltaGreenX + deltaRedX * deltaRedX +
-                deltaBlueY * deltaBlueY + deltaGreenY * deltaGreenY + deltaRedY * deltaRedY;
+        return deltaBlueX * deltaBlueX + deltaGreenX * deltaGreenX + deltaRedX * deltaRedX
+                + deltaBlueY * deltaBlueY + deltaGreenY * deltaGreenY + deltaRedY * deltaRedY;
     }
     public int[] findHorizontalSeam() {
         double M[][] = new double[width][height];
-        for(int i = 0; i < width; i++) {
+        for (int i = 0; i < width; i++) {
             if (i == 0) {
                 for (int j = 0; j < height; j++) {
                     M[i][j] = energy(i, j);
@@ -60,21 +60,24 @@ public class SeamCarver {
                 continue;
             }
             for (int j = 0; j < height; j++) {
-                M[i][j] = energy(i, j) + Math.min(M[i - 1][j], Math.min(M[i - 1][Math.max(j - 1, 0)],
+                M[i][j] = energy(i, j)
+                        + Math.min(M[i - 1][j], Math.min(M[i - 1][Math.max(j - 1, 0)],
                         M[i - 1][Math.min(j + 1, height - 1)]));
             }
         }
         int minIndex = 0;
-        for(int j = 0; j < height; j++) {
-            if (M[width - 1][j] < M[width - 1][j]) {
+        for (int j = 0; j < height; j++) {
+            if (M[width - 1][j] < M[width - 1][minIndex]) {
                 minIndex = j;
             }
         }
         int[] result = new int[width];
         result[width - 1] = minIndex;
         for (int i = width - 2; i >= 0; i--) {
-            result[i] = M[i][minIndex] <= M[i][Math.max(minIndex - 1, 0)] ? minIndex : Math.max(minIndex - 1, 0);
-            result[i] = M[i][result[i]] <= M[i][Math.min(minIndex + 1, height - 1)] ? result[i] : Math.min(minIndex + 1, height - 1);
+            result[i] = M[i][minIndex] <= M[i][Math.max(minIndex - 1, 0)]
+                    ? minIndex : Math.max(minIndex - 1, 0);
+            result[i] = M[i][result[i]] <= M[i][Math.min(minIndex + 1, height - 1)]
+                    ? result[i] : Math.min(minIndex + 1, height - 1);
             minIndex = result[i];
         }
         return result;

@@ -14,19 +14,19 @@
 
 import edu.princeton.cs.algs4.Picture;
 import java.awt.Color;
-import java.awt.FileDialog;
+//import java.awt.FileDialog;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import javax.imageio.ImageIO;
+//import java.awt.image.BufferedImage;
+//import java.io.File;
+//import java.io.IOException;
+//import java.net.URL;
+//import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+//import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -101,7 +101,6 @@ public class SeamCarverVisualizer {
          frame.revalidate();
          frame.repaint();
     }
-
     public static void main(String[] args) {
         if (args.length <= 1) {
             System.out.println("Usage: SeamCarver [filename] [numPixels] [horizontal | yN]");
