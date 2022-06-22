@@ -18,14 +18,32 @@ public class SeamCarver {
     public int height() {
         return height;
     }
+    private int indexMapperX(int x) {
+        if (x < 0) {
+            return width + x;
+        } else if (x >= width) {
+            return x - width;
+        } else {
+            return x;
+        }
+    }
+    private int indexMapperY(int y) {
+        if (y < 0) {
+            return height + y;
+        } else if (y >= height) {
+            return y - height;
+        } else {
+            return y;
+        }
+    }
     public double energy(int x, int y) {
-        Color colorAtXMinus1 = picture.get(Math.max(x - 1, 0), y);
-        Color colorAtXPlus1 = picture.get(Math.min(width - 1, x + 1), y);
+        Color colorAtXMinus1 = picture.get(indexMapperX(x - 1), y);
+        Color colorAtXPlus1 = picture.get(indexMapperX(x + 1), y);
         int deltaRedX = colorAtXMinus1.getRed() - colorAtXPlus1.getRed();
         int deltaGreenX = colorAtXMinus1.getGreen() - colorAtXPlus1.getGreen();
         int deltaBlueX = colorAtXMinus1.getBlue() - colorAtXPlus1.getBlue();
-        Color colorAtYMinus1 = picture.get(x, Math.max(y - 1, 0));
-        Color colorAtYPlus1 = picture.get(x, Math.min(height - 1, y + 1));
+        Color colorAtYMinus1 = picture.get(x, indexMapperY(y - 1));
+        Color colorAtYPlus1 = picture.get(x, indexMapperY(y + 1));
         int deltaRedY = colorAtYPlus1.getRed() - colorAtYMinus1.getRed();
         int deltaGreenY = colorAtYMinus1.getGreen() - colorAtYPlus1.getGreen();
         int deltaBlueY = colorAtYMinus1.getBlue() - colorAtYPlus1.getBlue();
